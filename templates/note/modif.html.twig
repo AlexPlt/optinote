@@ -1,9 +1,9 @@
 {# templates/note/add.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une nouvelle note{% endblock %}
+{% block title %}Modifier une note{% endblock %}
 
-{% block titlePage %}Ajouter une nouvelle note{% endblock %}
+{% block titlePage %}Modifier une note{% endblock %}
 
 {% block body %}
   {{ form_start(form) }}
@@ -33,6 +33,5 @@
     </div>
 
   {{ form_end(form) }}
-
   <a href="{{ url('list_all_notes') }}" id="buttonReturn" class="grey">Retour</a>
 {% endblock %}

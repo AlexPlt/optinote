@@ -3,18 +3,16 @@
     <head>
       <meta charset="UTF-8">
       <title>{% block title %}Welcome!{% endblock %}</title>
-      {% block stylesheets %}{% endblock %}
+      {% block stylesheets %}<link rel="stylesheet" href="/css/stylesheet.css">{% endblock %}
     </head>
     <body>
-      <nav>
-        <ul>
-          <li><a href="/">Accueil</a></li>
-          <li><a href="/note/listAll/">Liste des notes</a></li>
-          <li><a href="/note/add/">Ajouter une note</a></li>
-        </ul>
-      </nav>
-      <h1>{% block titlePage %}{% endblock %}</h1>
+      <div class="header">
+        <h1>OPTINOTE</h1>
+        <p>Bienvenue sur Optinote, l'application pour gérer vos notes !</p>
+      </div>
+      <h2>{% block titlePage %}{% endblock %}</h2>
       <div>{% block body %}{% endblock %}</div>
+      <div class="footer"></div>
       {% block javascripts %}{% endblock %}
     </body>
 </html>

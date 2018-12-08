@@ -6,11 +6,29 @@
 {% block titlePage %}Confirmation de suppression d'une note{% endblock %}
 
 {% block body %}
-  <div>
-    <h1>{{ note.titre }}</h1>
-    <p>Fait à {{ note.date|date("H:i") }}, le {{ note.date|date("d/m/Y") }}</p>
+  <div class="note">
+    <div>
+      <h3>{{ note.titre }}</h3>
+      {% if note.importance == 1 %}
+        <img src="/images/star.png" alt="imp1" class="yellow star">
+        <img src="/images/star.png" alt="imp2" class="star">
+        <img src="/images/star.png" alt="imp3" class="star">
+      {% elseif note.importance == 2 %}
+        <img src="/images/star.png" alt="imp1" class="yellow star">
+        <img src="/images/star.png" alt="imp2" class="yellow star">
+        <img src="/images/star.png" alt="imp3" class="star">
+      {% elseif note.importance == 3 %}
+        <img src="/images/star.png" alt="imp1" class="yellow star">
+        <img src="/images/star.png" alt="imp2" class="yellow star">
+        <img src="/images/star.png" alt="imp3" class="yellow star">
+      {% endif %}
+    </div>
+    <p class="italic">Fait à {{ note.date|date("H:i") }} , le {{ note.date|date("d/m/Y") }}</p>
     <p>{{ note.text }}</p>
   </div>
-  <p>Voulez-vous supprimer cette note ?</p>
-  <a href="/note/del/{{ note.id }}/confirm">Confirmer</a>
+  <div class="divBottom">
+    <p>Voulez-vous supprimer cette note ?</p>
+    <a href="{{ url('del_note', {'id': note.id}) }}" class="red">Confirmer</a>
+    <a href="{{ url('list_all_notes') }}" class="grey">Retour</a>
+  </div>
 {% endblock %}

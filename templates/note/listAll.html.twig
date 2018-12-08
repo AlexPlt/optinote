@@ -1,17 +1,79 @@
 {# templates/note/listALl.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de toutes les notes{% endblock %}
+{% block title %}
+  {% if recherche == false %}
+    Liste de toutes les notes
+  {% else %}
+    Recherche de note
+  {% endif %}
+{% endblock %}
 
-{% block titlePage %}Liste de toutes les notes{% endblock %}
+{% block titlePage %}
+  {% if recherche == false %}
+    Toutes les notes
+  {% else %}
+    Recherche de note
+  {% endif %}
+{% endblock %}
 
 {% block body %}
-  {% for note in notes %}
-    <div>
-      <h1>{{ note.titre }}</h1>
-      <p>Fait à {{ note.date|date("H:i") }}, le {{ note.date|date("d/m/Y") }}</p>
-      <p>{{ note.text }}</p>
-      <a href="/note/del/{{ note.id }}">Supprimer la note</a>
+  {% if notes is empty %}
+    {% if recherche == false %}
+      <p>Il n'y a aucunes notes pour l'instant :(.</p>
+      <p>Cliquez sur le bouton ci-dessous pour en ajouter une.</p>
+    {% else %}
+      <p>Voici les résultats pour la recherche : <b>{{ motRech }}</b></p>
+      <p>Aucune note ne correspond à votre recherche.</p>
+    {% endif %}
+  {% else %}
+    {% if recherche == false %}
+      <div id="buttonSearch">
+        {{ form_start(form) }}
+          {{ form_errors(form.recherche) }}
+          {{ form_widget(form.recherche) }}
+          {{ form_help(form.recherche) }}
+        {{ form_end(form) }}
+      </div>
+    {% else %}
+      <p>Voici les résultats pour la recherche : <b>{{ motRech }}</b></p>
+    {% endif %}
+
+    {% for note in notes %}
+      <div class="note">
+        <div>
+          <h3>{{ note.titre }}</h3>
+          {% if note.importance == 1 %}
+            <img src="/images/star.png" alt="imp1" class="yellow star">
+            <img src="/images/star.png" alt="imp2" class="star">
+            <img src="/images/star.png" alt="imp3" class="star">
+          {% elseif note.importance == 2 %}
+            <img src="/images/star.png" alt="imp1" class="yellow star">
+            <img src="/images/star.png" alt="imp2" class="yellow star">
+            <img src="/images/star.png" alt="imp3" class="star">
+          {% elseif note.importance == 3 %}
+            <img src="/images/star.png" alt="imp1" class="yellow star">
+            <img src="/images/star.png" alt="imp2" class="yellow star">
+            <img src="/images/star.png" alt="imp3" class="yellow star">
+          {% endif %}
+          <div id="divFloat">
+            <a href="{{ url('modif_note', {'id': note.id}) }}"><img src="/images/modif2.png" alt="Modifier la note" class="orange" /></a>
+            <a href="{{ url('confirm_del_note', {'id': note.id}) }}"><img src="/images/supp2.png" alt="Supprimer la note" class="red" /></a>
+          </div>
+        </div>
+        <p class="italic">Fait à {{ note.date|date("H:i") }} , le {{ note.date|date("d/m/Y") }}</p>
+        <p>{{ note.text }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if recherche == false %}
+    <div id="newNote">
+      <div class="button">
+        <a href="{{ url('add_note') }}" class="green"><img src="/images/add2.png" alt="Ajouter une note" /></a>
+        <p id="hover-content">Ajouter une nouvelle note</p>
+      </div>
     </div>
-  {% endfor %}
+  {% else %}
+    <a href="{{ url('list_all_notes') }}" id="buttonReturn" class="grey">Retour</a>
+  {% endif %}
 {% endblock %}

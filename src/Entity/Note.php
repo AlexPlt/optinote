@@ -31,6 +31,11 @@ class Note
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $importance;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Note
     public function setText(string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    public function getImportance(): ?int
+    {
+        return $this->importance;
+    }
+
+    public function setImportance(int $importance): self
+    {
+        $this->importance = $importance;
 
         return $this;
     }
