@@ -1,0 +1,16 @@
+{# templates/note/confirmDel.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de suppression d'une note{% endblock %}
+
+{% block titlePage %}Confirmation de suppression d'une note{% endblock %}
+
+{% block body %}
+  <div>
+    <h1>{{ note.titre }}</h1>
+    <p>Fait à {{ note.date|date("H:i") }}, le {{ note.date|date("d/m/Y") }}</p>
+    <p>{{ note.text }}</p>
+  </div>
+  <p>Voulez-vous supprimer cette note ?</p>
+  <a href="/note/del/{{ note.id }}/confirm">Confirmer</a>
+{% endblock %}

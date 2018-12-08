@@ -1,0 +1,12 @@
+{# templates/note/add.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une nouvelle note{% endblock %}
+
+{% block titlePage %}Ajouter une nouvelle note{% endblock %}
+
+{% block body %}
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+{% endblock %}

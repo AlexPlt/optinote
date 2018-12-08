@@ -8,14 +8,19 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        driver: 'pdo_mysql'
+        dbname: optinote
+        host: localhost
+        port: 3306
+        user: db_user
+        password: db_password
+        driver: mysql
         server_version: '5.7'
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
 
-        url: '%env(resolve:DATABASE_URL)%'
+        url: 'mysql://db_user:db_password@127.0.0.1:3306/optinote'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
