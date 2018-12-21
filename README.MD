@@ -6,6 +6,7 @@ Ce projet permet une gestion de note (mémo) :
  - ajouter / modifier / supprimer une note,
  - lister toutes les notes,
  - rechercher une ou plusieurs notes.
+
 Le site est responsive et s'adapte à toutes les tailles d'écran.
 
 ## Installation
